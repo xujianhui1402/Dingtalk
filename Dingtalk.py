@@ -92,6 +92,41 @@ def get_user_info(token, user_id):
     info = json.loads(requests.get(url).text)
     return info
 
+def post_active_card(content, userid):
+    token = get_access()
+    """
+        token, user_id, start_time, end_time, cursor, size
+        """
+    Webhook_url = "https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2"
+    payload = {
+        'access_token': token,
+    }
+    # print(payload)
+
+    # 第三步，发送消息text类型或者link类型、markdown类型、跳转ActionCard类型
+    body = {
+        "msg": {
+                 "msgtype": "action_card",
+                 "action_card": {
+                 "title": "test",
+                 "markdown": content,
+                 "btn_orientation": "0",
+                 "btn_json_list": [
+            {
+                "title": "确认",
+                "action_url": "https://www.dingtalk.com"
+            }
+        ]
+                 }
+        },
+        "to_all_user": "false",
+        "agent_id": 'X',
+        "userid_list": userid
+    }
+    headers = {'Content-Type': 'application/json; charset=utf-8'}
+    info = json.loads(requests.post(Webhook_url, params=payload, headers=headers, json=body).text)
+    # print(info)
+    return info
 
 if __name__ == '__main__':
     # 使用方法

@@ -5,3 +5,5 @@ Dingding Robot
 - 持续更新ing
 ###参考CSDN博主「小飞飞要变强」的原创文章，可以实现钉钉人员信息的获取
 - 原文链接：https://blog.csdn.net/qq_42708830/article/details/115184878
+
+> 2021.9.18 新功能：发布工作通知，详细功能见`post_active_card(content, userid)`方法
